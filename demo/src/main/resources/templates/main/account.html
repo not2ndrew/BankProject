@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "main.css">
+
+<html>
+<body xmlns:th = "https://www.thymeleaf.org">
+    <form method = "post" th:action = "@{/account}" th:object = "${account}" class = "account_form">
+
+        <div class = "header_box">
+            <h1>Create Your Bank Account</h1>
+        </div>
+
+        <div class = "form_box">
+            <div class = "input_box">
+                <input type = "text" name = "name" placeholder = "Name of your Account" th:value = *{name}>
+            </div>
+
+            <div class = "select_box">
+                <select name = "type">
+                    <option value = "chequing">Chequing</option>
+                    <option value = "savings">Savings</option>
+                    <option value = "business">Business</option>
+                </select>
+            </div>
+
+            <p>Need to go back <a th:href = "@{/main}">Click here</a></p>
+            <button type = "submit"  class = "btn" id = "submit">Submit</button>
+
+        </div>
+    </form>
+</body>
+</html>

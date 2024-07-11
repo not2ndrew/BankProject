@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "main.css">
+
+<html>
+<body xmlns:th = "https://www.thymeleaf.org">
+    <div class = "transaction">
+        <table>
+            <thead>
+                <td>Transaction Id</td>
+                <td>Transaction Type</td>
+                <td>Amount</td>
+                <td>Created at</td>
+                <td>Account Name</td>
+            </thead>
+
+            <tbody>
+                <tr th:each = "transaction : ${transactionList}">
+                    <td th:text = "${transaction.transactionId}">Transaction Id</td>
+                    <td th:text = "${transaction.transactionType}">Transaction Type</td>
+                    <td th:text = "${transaction.amount}">Amount</td>
+                    <td th:text = "${transaction.createdAt}">Created At</td>
+                    <td th:text = "${transaction.account.name}">Account Name</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

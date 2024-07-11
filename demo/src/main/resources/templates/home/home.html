@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "home.css">
+
+<html xmlns:th = "https://www.thymeleaf.org">
+<body>
+    <nav>
+        <div class = "options_box">
+            <a class = "options">Home</a>
+            <a class = "options">About</a>
+            <a class = "options">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- HERO -->
+    <div class = "box" id = "hero">
+        <h1>Za Bank</h1>
+    </div>
+
+    <!-- ABOUT -->
+    <div class = "box">
+        <h2 class = "h2_header">About</h2>
+
+        <div class = "text_box">
+            <p>This project is full-stack. It uses both front-end design and back-end database.</p>
+            <p>This is a banking application where people can create bank accounts. 
+                Things such as transfer, deposit, and withdraw interactions will work.
+            </p>
+            <p>To create an account, please press on the register button.</p>
+        </div>
+
+        <div class = "btn_box">
+            <a class = "btn" id = "register" th:href = "@{register}">Register</a>
+            <a class = "btn" id = "login" th:href = "@{login}">Login</a>
+        </div>
+
+        <div class = "text_box">
+            <p>The following programming languages and frameworks were used to create this project.</p>
+            <!-- Get a bunch of icons -->
+            <div class = "img_box">
+                <div class = "img_row">
+                    <div class = "img_card">
+                        <img src = "../Image/html_icon.png" alt = "HTML_icon">
+                        <figcaption>HTML</figcaption>
+                    </div>
+
+                    <div class = "img_card">
+                        <img src = "../Image/css_icon.png" alt = "CSS_icon">
+                        <figcaption>CSS</figcaption>
+                    </div>
+
+                    <div class = "img_card">
+                        <img src = "../Image/java_icon.png" alt = "Java_icon">
+                        <figcaption>Java</figcaption>
+                    </div>
+                </div>
+
+                <div class = "img_row">
+                    <div class = "img_card">
+                        <img src = "../Image/mysql_icon.png" alt = "mySQL_icon">
+                        <figcaption>MySQL</figcaption>
+                    </div>
+                    
+                    <div class = "img_card">
+                        <img src = "../Image/spring_icon.png" alt = "SpringBoot_icon">
+                        <figcaption>Spring-Boot</figcaption>
+                    </div>
+
+                    <div class = "img_card">
+                        <img src = "" alt = "Thymeleaf_icon">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class = "box">
+        <h2>Contact</h2>
+
+        <!-- I will do this later. -->
+        <form></form>
+    </div>
+</body>
+</html>

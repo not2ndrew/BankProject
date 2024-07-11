@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "main.css">
+
+<html xmlns:th = "https://www.thymeleaf.org">
+    <body>
+        <nav class = "top_nav">
+            <h2>Za Bank</h2>
+            <div class = "menu">
+                <a th:href = "@{/transaction}" class = "menu_text">View Transaction History</a>
+                <p class = "menu_text" id = "menu_select" onclick = "toggleNav()">Payment Transaction</p>
+            </div>
+
+            <div class = "log_out_box">
+                <div class = "user_box">
+                    <p th:text = "${fname}">First Name</p>
+                    <p th:text = "${lname}">Last Name</p>
+                </div>
+                
+                <div sec:authorize = "#{isAuthenticated()}" id = "log_out">
+                    <img src = "" alt = "Log_out icon">
+                    <a th:href = "@{/logout}">Log out</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- SIDE NAV -->
+        <nav class = "side_nav" id = "side_nav">
+            <select class = "select_payment">
+                <option value = "select">Select</option>
+                <option value = "deposit">Deposit</option>
+                <option value = "withdraw">Withdraw</option>
+                <option value = "transfer">Transaction</option>
+            </select>
+
+            <div class = "payment_form" id = "deposit_form">
+                <h3>Deposit</h3>
+                <form method = "post" th:action = "@{/depositForm}" th:object = "${transaction}">
+                    <div class = "form_row">
+                        <!-- The reason I need id is because "Thymeleaf form cannot return anything
+                         other than a string." -->
+                        <!-- Id refers to Long Id in account (Link is spoken in Russian, recommend an auto-translator)-->
+                        <!-- https://ru.stackoverflow.com/questions/1555407/thymeleaf-failed-to-convert-from-type-java-lang-string-to-type-java-lang-long -->
+                        <p>From Account: </p>
+                        <select th:field = "*{account}">
+                            <option th:each = "accountSelected : ${accountList}" 
+                                    th:value = "${accountSelected.id}" 
+                                    th:text = "${accountSelected.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class = "form_row">
+                        <p>The amount: </p>
+                        <input type = "text" inputmode = "numeric" name = "amount" th:value = "*{amount}">
+                    </div>
+
+                    <div class = "form_row">
+                        <button type = "submit" class = "btn" id = "submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class = "payment_form" id = "withdraw_form">
+                <h3>Withdraw</h3>
+                <form method = "post" th:action = "@{/withdrawForm}" th:object = "${transaction}">
+
+                    <div class = "form_row">
+                        <p>From Account: </p>
+                        <select th:field = "*{account}">
+                            <option th:each = "accountSelected : ${accountList}" 
+                                    th:value = "${accountSelected.id}" 
+                                    th:text = "${accountSelected.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class = "form_row">
+                        <p>The amount: </p>
+                        <input type = "text" inputmode = "numeric" name = "amount" th:value = "*{amount}">
+                    </div>
+
+                    <div class = "form_row">
+                        <button type = "submit" class = "btn" id = "submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Transaction Form -->
+            <!-- Transaction Form requires 2 accounts -->
+            <!-- So the form will look different compared to the deposit and withdraw. -->
+            <div class = "payment_form" id = "transfer_form">
+                <h3>Transaction</h3>
+                <form method = "post" th:action = "@{/transactionForm}" th:object = "${transferRequest}">
+
+                    <div class = "form_row">
+                        <p>From Account: </p>
+                        <select th:field = "*{accountSource}">
+                            <option th:each = "accountSelected : ${accountList}" 
+                                    th:value = "${accountSelected.id}" 
+                                    th:text = "${accountSelected.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class = "form_row">
+                        <p>To Account: </p>
+                        <select th:field = "*{accountTarget}">
+                            <option th:each = "accountSelected : ${accountList}" 
+                                    th:value = "${accountSelected.id}" 
+                                    th:text = "${accountSelected.name}"></option>
+                        </select>
+                    </div>
+
+                    <div class = "form_row">
+                        <p>The amount transfered: </p>
+                        <input type = "text" inputmode = "numeric" name = "amount" th:value = "*{amount}">
+                    </div>
+
+                    <div class = "form_row">
+                        <button type = "submit" class = "btn" id = "submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <a onclick = "toggleNav()"><img src = "" alt = "close_icon">Close</a>
+        </nav>
+
+        <div th:if = "${error}" class = "box" id = "error_message">
+            <h2 th:text = "${error}">Error</h2>
+        </div>
+
+        <!-- This is how much your current balance is based on all accounts' balance -->
+        <div class = "box" id = "balance_box">
+            <div class = "text_box">
+                <h2>Total Accounts Balance:</h2>
+            </div>
+
+            <div class = "text_box">
+                <h2 th:text = "${totalBalance}" id = "number">0.00</h2>
+            </div>
+        </div>
+        
+        <div class = "box">
+            <a class = "btn" id = "account_btn" th:href = "@{/account}">Create Account</a>
+        </div>
+        
+        <!-- This will show all accounts as a list -->
+        <!-- Each account will show: accountName, accountId, accountType, accountBalance, and created at -->
+        <!-- https://www.youtube.com/watch?v=P2ri99BDTTI -->
+        <div class = "box" id = "account_box">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Account Name</td>
+                        <td>Account Id</td>
+                        <td>Account Type</td>
+                        <td>Created At</td>
+                        <td>Balance</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each = "account : ${accountList}" class = "account_list">
+                        <td th:text = "${account.name}">Account Name</td>
+                        <td th:text = "${account.accountId}">Account Id</td>
+                        <td th:text = "${account.type}">Account Type</td>
+                        <td th:text = "${account.createdAt}">Created At</td>
+                        <td th:text = "${account.balance}">Balance</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- If there are more than 5 (for now) accounts displayed, create a new page. -->
+         </div>
+         <script src = "main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "home.css">
+
+<html xmlns:th = "https://www.thymeleaf.org">
+<body>
+    <div class = "header_box">
+        <h1>Register</h1>
+    </div>
+
+
+    <!-- Success Message -->
+     <div th:if = "${param.success}" class = "msg_box">
+        <p>Success: Please head to the login page.</p>
+        
+        <a th:href = "@{/login}">Click here to Login</a>
+    </div>
+    
+    <!-- Invalid Message -->
+    <!-- <div th:if = "${param.invalid}" class = "msg_box" id = "invalid_msg">
+        <p>Email already taken: Please use another email.</p>
+    </div> -->
+
+    <!-- @{register} refers to GetMapping in UserRegistrationController. -->
+    <!-- myUserRequest is the thymeleaf object variable referencing fname, lname, email, etc. -->
+    <form method = "post" th:action = "@{/register}" th:object = "${myUserRequest}">
+
+        <div class = "form_container">
+            <div class = "form_row">
+                <input type = "text" id = "fname" name = "fname" placeholder = "First Name" th:value = "*{fname}">
+                <input type = "text" id = "lname" name = "lname" placeholder = "Last Name" th:value = "*{lname}">
+            </div>
+    
+            <div class = "form_row">
+                <input type = "email" id = "email" name = "email" placeholder = "Email" th:value = "*{email}">
+            </div>
+    
+            <div class = "form_row">
+                <input type = "password" id = "password" name = "password" placeholder = "Password" th:value = "*{password}">
+                <input type = "date" id = "dob" name = "dob" placeholder = "Date of Birth" th:value = "*{dob}">
+            </div>
+
+            <p>Already have an account? <a th:href = "@{/login}">Login</a></p>
+            <button type = "submit" class = "btn" id = "submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

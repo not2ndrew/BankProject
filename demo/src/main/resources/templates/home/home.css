@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #020202;
+}
+
+.box {
+    height: 100vh;
+    width: 70%;
+    margin: auto;
+}
+
+/* FONTS */
+h1, h2, p, a, figcaption, label {
+    color: white;
+}
+
+h1, h2 {
+    font-family: 'Raleway', sans-serif;
+}
+
+p, a, figcaption, label {
+    font-family: 'Merriweather', sans-serif;
+}
+
+h1 {
+    font-size: 150px;
+    margin: 5%;
+}
+
+h2 {
+    font-size: 80px;
+}
+
+a {
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p, figcaption, label {
+    font-size: 20px;
+}
+
+/* HERO */
+#hero {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+/* NAVIGATION */
+nav {
+    background-color: rgb(82, 82, 82);
+    top: 0;
+    width: 100%;
+    position: sticky;
+
+    display: flex;
+    justify-content: end;
+}
+
+.options_box {
+    padding: 30px;
+}
+
+.options_box a {
+    margin: 0 20px;
+    transition: 0.3s;
+}
+
+.options_box a:hover {
+    color: bisque;
+    cursor: pointer;
+}
+
+/* ABOUT */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100px;
+    width: 250px;
+
+    border-radius: 4px;
+}
+
+#register {
+    background-color: orangered;
+}
+
+#login {
+    background-color: lightblue;
+}
+
+.btn_box {
+    display: flex;
+    justify-content: center;
+}
+
+.img_row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.img_card {
+    text-align: center;
+}
+
+img {
+    height: auto;
+    width: 25%;
+}
+
+/* FORM */
+form {
+    width: 50%;
+    margin: auto;
+}
+
+.header_box {
+    display: flex;
+    justify-content: center;
+}
+
+.form_container {
+    padding: 5%;
+    background-color: #505050;
+}
+
+.form_row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+input {
+    font-family: "Merriweather", sans-serif;
+    font-size: 20px;
+    padding: 16px;
+
+    height: 40px;
+    width: 100%;
+}
+
+#fname, #password {
+    margin-right: 32px;
+}
+
+#submit {
+    background-color: goldenrod;
+}
+
+/* MESSAGE BOX */
+.msg_box {
+    background-color: #86bd6c;
+    height: 50px;
+    width: 30%;
+
+    padding: 10px;
+    margin: 32px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#invalid_msg {
+    background-color: orangered;
+}

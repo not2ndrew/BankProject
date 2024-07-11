@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" type = "text/css" href = "home.css">
+
+<html xmlns:th = "https://www.thymeleaf.org">
+<body>
+    <div class = "header_box">
+        <h1>Login</h1>
+    </div>
+
+    <div th:if = "${param.error}" class = "msg_box" id = "invalid_msg">
+        <p>Invalid Email or Password.</p>
+    </div>
+
+    <div th:if = "${param.logout}" class = "msg_box">
+        <p>You have successfully logged out.</p>
+    </div>
+    
+    <form th:action = "@{/login}" method = "post">
+        <div class = "form_container">
+            <div class = "form_row">
+                <!-- For some reason, the name MUST be username for Spring Security to identify. -->
+                <input type = "email" id = "email" name = "username" placeholder = "Email">
+            </div>
+    
+            <div class = "form_row">
+                <input type = "password" name = "password" placeholder = "Password">
+            </div>
+
+            <p>Need to create an account? <a th:href = "@{/register}">Sign up</a></p>
+            <button type = "submit" class = "btn" id = "submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
