@@ -19,10 +19,9 @@
         <a th:href = "@{/login}">Click here to Login</a>
     </div>
     
-    <!-- Invalid Message -->
-    <!-- <div th:if = "${param.invalid}" class = "msg_box" id = "invalid_msg">
-        <p>Email already taken: Please use another email.</p>
-    </div> -->
+    <div th:if = "${error}" class = "msg_box" id = "error_msg">
+        <p th:text = "${error}">Error</p>
+    </div>
 
     <!-- @{register} refers to GetMapping in UserRegistrationController. -->
     <!-- myUserRequest is the thymeleaf object variable referencing fname, lname, email, etc. -->

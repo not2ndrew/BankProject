@@ -170,6 +170,6 @@ input {
     flex-direction: column;
 }
 
-#invalid_msg {
+#error_msg {
     background-color: orangered;
 }

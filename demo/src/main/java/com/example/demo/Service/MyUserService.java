@@ -37,24 +37,37 @@ public class MyUserService {
             .orElseThrow(() -> new MyUserNotFoundException("User by Id: " + id + " was not found."));
     }
 
-    // This should add the User based on their email
-    // Need to learn spring boot security requests.
-    public void registerUser(MyUserRequest myUserDto) {
-        String email = myUserDto.getEmail();
+    public boolean MyUserExist(MyUserRequest myUserRequest) {
+        String email = myUserRequest.getEmail();
 
         Optional<MyUserRequest> exist = myUserRepository.findMyUserByEmail(email)
             .map(myUserDtoMapper);
 
         if (exist.isPresent()) {
-            throw new MyUserNotFoundException("User by email: " + email + " already exist.");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // This should add the User based on their email
+    // Need to learn spring boot security requests.
+    public void registerUser(MyUserRequest myUserRequest) {
+        String email = myUserRequest.getEmail();
+
+
+        boolean exist = MyUserExist(myUserRequest);
+
+        if (exist) {
+            throw new MyUserNotFoundException("User by email: " +  email + " already exist.");
         }
 
         MyUser myUser = new MyUser(
-            myUserDto.getFname(), 
-            myUserDto.getLname(), 
-            myUserDto.getEmail(), 
-            myUserDto.getPassword(), 
-            myUserDto.getDob(), 
+            myUserRequest.getFname(), 
+            myUserRequest.getLname(), 
+            myUserRequest.getEmail(), 
+            myUserRequest.getPassword(), 
+            myUserRequest.getDob(), 
             new ArrayList<Account>()
         );
 
